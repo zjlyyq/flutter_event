@@ -14,7 +14,7 @@ class MyApp extends StatelessWidget {
       accentColor: Colors.white,//(按钮)Widget前景色为白色
       primaryColor: Colors.blue,//主题色为蓝色
       iconTheme:IconThemeData(color: Colors.grey),//icon主题为灰色
-      textTheme: TextTheme(body1: TextStyle(color: Colors.black))//文本主题为黑色
+      textTheme: TextTheme(bodyText2: TextStyle(color: Colors.black))//文本主题为黑色
   );
   // Android深色主题
   final ThemeData kIOSTheme = ThemeData(
@@ -22,7 +22,7 @@ class MyApp extends StatelessWidget {
       accentColor: Colors.black,//(按钮)Widget前景色为黑色
       primaryColor: Colors.cyan,//主题色Wie青色
       iconTheme:IconThemeData(color: Colors.blue),//icon主题色为蓝色
-      textTheme: TextTheme(body1: TextStyle(color: Colors.red))//文本主题色为红色
+      textTheme: TextTheme(bodyText2: TextStyle(color: Colors.red))//文本主题色为红色
   );
 
   // This widget is the root of your application.
@@ -60,19 +60,8 @@ class MultipleTapGestureRecognizer extends TapGestureRecognizer {
   }
 }
 class _MyHomePageState extends State<MyHomePage> {
-  int _counter = 0;
   double x = 0;
   double y = 0;
-  void _incrementCounter() {
-    setState(() {
-      // This call to setState tells the Flutter framework that something has
-      // changed in this State, which causes it to rerun the build method below
-      // so that the display can reflect the updated values. If we changed
-      // _counter without calling setState(), then the build method would not be
-      // called again, and so nothing would appear to happen.
-      _counter++;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -134,7 +123,7 @@ class _MyHomePageState extends State<MyHomePage> {
                   color: Theme.of(context).primaryColor,
                   child: Text(
                     'Text with a background color',
-                    style: Theme.of(context).textTheme.title,  // 除了定义 Material Design 规范中那些可自定义部分样式外，主题的另一个重要用途是样式复用。
+                    style: Theme.of(context).textTheme.headline6,  // 除了定义 Material Design 规范中那些可自定义部分样式外，主题的另一个重要用途是样式复用。
                   ),
                 ),
                 Listener(
@@ -240,10 +229,22 @@ class _MyHomePageState extends State<MyHomePage> {
                 print('parent onTap');
               },
               child: GestureDetector(
-                onTap: () {print('flatbutton onTap');},
-                child: FlatButton(
-                  onPressed: () {print('flatbutton click');},
+                onTap: () {print('textButton onTap');},
+                child: TextButton(
+                  onPressed: () {print('textButton click');},
                   child: Icon(Icons.android),
+                ),
+              ),
+            ),
+            GestureDetector(
+              onDoubleTap: () {
+                print('parent onDoubleTap');
+              },
+              child: GestureDetector(
+                onDoubleTap: () {print('textButton onDoubleTap');},
+                child: TextButton(
+                  onPressed: () {print('textButton click');},
+                  child: Icon(Icons.dashboard),
                 ),
               ),
             )
@@ -251,7 +252,7 @@ class _MyHomePageState extends State<MyHomePage> {
         )
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _incrementCounter,
+        onPressed: () {},
         tooltip: 'Increment',
         child: Icon(Icons.add),
       ), // This trailing comma makes auto-formatting nicer for build methods.
